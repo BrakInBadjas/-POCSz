@@ -1,0 +1,21 @@
+Brainstorm session 25/10/2016
+
+4 different kind of tags (
+4 verschillende soorten passen (bewoners, medewerkers, gesloten afdeling, artsen)
+ - medewerkers
+ - bewoners
+ - lopers 
+
+alle arduino's/scanners een ID, als in database staat dat je toegang hebt mag je er door.
+
+snel mensen toegang moeten geven / afnemen
+snel authorisatie controleren
+
+datamodel maken (medewerker/client database)
+database met deuren
+
+elke arduino een public key (encryption)
+
+De arduino leest een pasje, krijgt daar een UID van. Op de arduino staat de public key van de server,
+deze wordt gebruikt om de UID te versleutelen en stuurt dit beveiligd naar de server. 
+Daar gebruikt de server haar private key om de UID te ontsleutelen. Deze wordt vervolgens gecontroleerd met de database.
