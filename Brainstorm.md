@@ -45,3 +45,8 @@ De server verstuurd het value/key pair beveiligd naar de arduino.
 De arduino gebruikt zijn private key om het value/key pair te ontsleutelen.
 De arduino controleert of de verstuurde key UID overeen komt met de orgineel verstuurde key UID.
 De arduino voert de vereisde actie uit op basis van de authorisatie.
+
+
+##Database design
+
+![Database desgin](database.png "Database design")
