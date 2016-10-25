@@ -7,4 +7,4 @@ Created By:
 | Suzanna Wentzel                                       | S1850512       |
 | [Danique Lummen](https://github.com/daniquel)         | S1853155       | daniquelummen@gmail.com
 | Jesper Simon                                          | S1820338       |
-| Apostolis Christoulias                                | S1833383       |
+| Apostolis Christoulias                                | S1833383       | apochri@hotmail.com
