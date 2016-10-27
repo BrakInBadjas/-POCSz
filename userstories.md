@@ -90,8 +90,8 @@ As a system administrator I want to authorize keys of visitors
 
 
 As a visitor I want to have access to the common areas during visitor hours  
-  Test being able to enter the common area (pass)  
-  Test not being able to enter the common area (fail)  
+-   Test being able to enter the common area (pass)  
+-   Test not being able to enter the common area (fail)  
 
 
 As a client I want to (temporarily) authorize specific cards which belong to my family members  
