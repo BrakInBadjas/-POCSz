@@ -29,7 +29,18 @@ As a client I want to get into the common areas
 
 As a doctor I want to get into all the rooms  
 -    Test with door to which doctor has access 		        (pass)  
+
+
+As a user I want visual or audible feedback when my card has been scanned
+-   Test with a key for the scanner and hear a noise or see a light (pass)  
+-   Test with a key and gain no feedback (fail)  
+
+
+As a user I want visual or audible feedback regarding my authorization status
+-   Test on an door and hear or see something (pass)  
+-   Test on an unauthorized door and hear or see nothing (fail)  
   
+
 As a system administrator I don’t want old ‘cards’ to be able to enter the rooms  
 -    Test with door with a card that belongs to an old client/staff member (door should stay closed) 	                       (pass)  
 -    Test with door with a card that belongs to a current client/staff member on a door he/she has access to (door should open) (fail)  
@@ -40,7 +51,7 @@ As a system administrator I want to be able to issue a new ‘card’
 -    Test with a new card without access                     (pass)  
 
 
-As a system administrator I want to be able to disable a ‘card’  
+As a system administrator I want to be able to disable a ‘card’ (temporarily)  
 -    Test with an enabled card                               (pass)  
 -    Test with a disabled card                               (false)  
 
@@ -64,5 +75,35 @@ As a system administrator I want to be able to delete the UID of a RFID-tag from
 
 
 As a system administrator I want no users to be able to copy or see the authorized UID of a RFID-tag  
+
+
+As a team manager I want to see who opened which door at what time  
+
+
+As a team manager I want to see who is authorized to open a specific door  
+
+
+As a team manager I want to see how many cards are authorized at any given time  
+
+
+As a system administrator I want to authorize keys of visitors  
+
+
+As a visitor I want to have access to the common areas during visitor hours  
+  Test being able to enter the common area (pass)  
+  Test not being able to enter the common area (fail)  
+
+
+As a client I want to (temporarily) authorize specific cards which belong to my family members  
+
+
+As a team manager I want to be able to control the authorization of all cards and doors belongs to my team  
+
+
+As a system administrator I want to open all the doors at any time in case of an emergency  
+
+
+As a system administrator I want to revoke all access to a door  
+
 
 
