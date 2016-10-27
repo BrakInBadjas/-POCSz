@@ -6,5 +6,5 @@ Created By:
 | [Milo Cesar](https://github.com/milo526)              | S1829688       | milocesar1@gmail.com
 | [Suzanna Wentzel] (https://github.com/SuzannaWentzel) | S1850512       | suzannawentzel1708@gmail.com
 | [Danique Lummen](https://github.com/daniquel)         | S1853155       | daniquelummen@gmail.com
-| Jesper Simon                                          | S1820338       |
+| Jesper Simon                                          | S1820338       | jespersimon@live.nl
 | Apostolis Christoulias                                | S1833383       | apochri@hotmail.com
