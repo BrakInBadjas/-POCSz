@@ -58,14 +58,9 @@ db = MySQLdb.connect(host="sql7.freesqldatabase.com",    	# host server
 #Create cursor. We use this to execute queries
 cur = db.cursor()
 
-#Execute all queries
-cur.execute('DROP TABLE IF EXISTS Person_Door;')
-cur.execute('DROP TABLE IF EXISTS Role_Door;')
-cur.execute('DROP TABLE IF EXISTS Person;')
-cur.execute('DROP TABLE IF EXISTS Door;')
-cur.execute('DROP TABLE IF EXISTS Role;') 
+#Execute all queries 
 cur.execute('CREATE TABLE Role (id INT NOT NULL, name TEXT NOT NULL, PRIMARY KEY (id));')
-cur.execute('CREATE TABLE Person (id INT NOT NULL, key_uid INT NOT NULL, name TEXT NOT NULL, role_id INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (role_id) REFERENCES Role(id));')
+cur.execute('CREATE TABLE Person (id INT NOT NULL, key_uid TEXT NOT NULL, name TEXT NOT NULL, role_id INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (role_id) REFERENCES Role(id));')
 cur.execute('CREATE TABLE Door (id INT NOT NULL, public_key TEXT NOT NULL, PRIMARY KEY (id) );') 
 cur.execute('CREATE TABLE Role_Door (role_id INT NOT NULL, door_id INT NOT NULL, PRIMARY KEY (role_id, door_id), FOREIGN KEY (role_id) REFERENCES Role(id), FOREIGN KEY (door_id) REFERENCES Door(id) );') 
 cur.execute('CREATE TABLE Person_Door (person_id INT NOT NULL, door_id INT NOT NULL, PRIMARY KEY (person_id, door_id), FOREIGN KEY (person_id) REFERENCES Person(id), FOREIGN KEY (door_id) REFERENCES Door(id) );') 
