@@ -59,7 +59,7 @@ def addNewPerson(person_id, key_uid, name, role_id):
 def getPersonDoor(user_id):
 	query = 'SELECT door_id FROM Person_Door WHERE person_id=' + str(user_id) + ';'
 	cur.execute(query)
-	return cur.fetchall()
+	return [list(a) for a in cur.fetchall()]
 	
 #Add a new Combination of person_id, door_id to the Person_Door Table
 def addNewPersonDoor(user_id, door_id):
@@ -72,7 +72,7 @@ def addNewPersonDoor(user_id, door_id):
 def getRoleDoor(role_id):
 	query = 'SELECT door_id FROM Role_Door WHERE role_id=' + str(role_id) + ';'
 	cur.execute(query)
-	return cur.fetchall()
+	return [list(a) for a in cur.fetchall()]
 	
 #Add a new Combination of role_id, door_id to the Role_Door Table
 def addNewRoleDoor(role_id, door_id):
@@ -109,7 +109,7 @@ print ""
 startt = time.time()
 
 #Specify which door to open
-doorToOpen = 5L
+doorToOpen = 1L
 
 #Check who tried to enter the door
 person = getPersonByUID("DC 7C 98 1E")
@@ -117,9 +117,9 @@ print "A card with UID: DC 7C 98 1E, has tried to open door " + str(doorToOpen)
 print "This card belongs to " + person[2] + " with ID: " + str(person[0]) + " and Role ID: " + str(person[3])
 
 #Check if the user has access to the door
-if ((doorToOpen,) in getPersonDoor(person[0])):
+if ([doorToOpen]) in getPersonDoor(person[0]):
 	print "He has acces to this door!"
-elif ((doorToOpen,) in getRoleDoor(person[3])):
+elif ([doorToOpen]) in getRoleDoor(person[3]):
 	print "His role has granted him access!"
 else:
 	print person[2] + " has no access to this door!"
