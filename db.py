@@ -71,14 +71,21 @@ def addNewRoleDoor(role_id, door_id):
 #Some test commands	
 
 #To use the add function, first be sure there is no entry with that id in the table you want to add something to
-#addNewDoor(0, 'asjfde942e9fdsffsdfsdfsdfsdfsdfsddsf')
-#addNewRole(1, 'Tester')
-#addNewPerson(0, 'DC 7C 98 1E', 'Chris Witteveen', 1)
-#addNewPersonDoor(0, 0)
-#addNewRoleDoor(1, 0)
+# addNewDoor(0, 'asjfde942e9fdsffsdfsdfsdfsdfsdfsddsf')
+# addNewRole(1, 'Tester')
+# addNewPerson(0, 'DC 7C 98 1E', 'Chris Witteveen', 1)
+# addNewPersonDoor(0, 0)
+# addNewRoleDoor(1, 0)
 
 getDoorPublicKey(0)
 getRole(1)
 getPerson(0)
 getPersonDoor(0)
 getRoleDoor(1)
+
+#Example output:
+# Id: 0 -- Public Key: asjfde942e9fdsffsdfsdfsdfsdfsdfsddsf
+# Id: 1 -- Name: Tester
+# Id: 0 -- Key UID: DC 7C 98 1E -- Name: Chris Witteveen -- Role: Tester
+# User [ID]Name: [0]Chris Witteveen -- Door ID: 0
+# Role [ID]Name: [1]Tester -- Door ID: 0
