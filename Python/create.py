@@ -1,70 +1,24 @@
-#https://sourceforge.net/projects/mysql-python/files/latest/download?source=files
+import pymysql.cursors
 
-#Host: sql7.freesqldatabase.com
-#Database name: sql7142368
-#Database user: sql7142368
-#Database password: y65TanAMCg
-#Port number: 3306
+#Database Settings
+host = "sql7.freesqldatabase.com"
+user = "sql7142368"
+password = "y65TanAMCg"
+db = "sql7142368"
 
-#DROP TABLE IF EXISTS Person_Door;
-#DROP TABLE IF EXISTS Role_Door;
-#DROP TABLE IF EXISTS Person;
-#DROP TABLE IF EXISTS Door;
-#DROP TABLE IF EXISTS Role;
-#
-#CREATE TABLE Role (
-#	id INT NOT NULL,
-#	name TEXT NOT NULL,
-#	PRIMARY KEY (id)
-#);
-#
-#CREATE TABLE Person (
-#	id INT NOT NULL,
-#	key_uid INT NOT NULL,
-#	name TEXT NOT NULL,
-#	role_id NOT NULL,
-#	PRIMARY KEY (id),
-#	FOREIGN KEY (role_id) REFERENCES Role(id)
-#);
-#
-#CREATE TABLE Door (
-#	id INT NOT NULL,
-#	public_key TEXT NOT NULL,
-#	PRIMARY KEY (id)
-#);
-#
-#CREATE TABLE Role_Door (
-#	role_id INT NOT NULL,
-#	door_id INT NOT NULL,
-#	PRIMARY KEY (role_id, door_id),
-#	FOREIGN KEY (role_id) REFERENCES Role(id),
-#	FOREIGN KEY (door_id) REFERENCES Door(id)
-#);
-#
-#CREATE TABLE Person_Door (
-#	person_id INT NOT NULL,
-#	door_id INT NOT NULL,
-#	PRIMARY KEY (person_id, door_id),
-#	FOREIGN KEY (person_id) REFERENCES Person(id),
-#	FOREIGN KEY (door_id) REFERENCES Door(id)
-#);
-import MySQLdb
-
-db = MySQLdb.connect(host="sql7.freesqldatabase.com",    	# host server
-                     user="sql7142368",         			# username
-                     passwd="y65TanAMCg",  					# password
-                     db="sql7142368")      				  	# db name
-
-#Create cursor. We use this to execute queries
+#Open connection to Database and start cursor. We use the cursor to execute queries.
+db = pymysql.connect(host=host,
+                             user=user,
+                             password=password,
+                             db=db,
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)				 
 cur = db.cursor()
 
-#Execute all queries 
-cur.execute('CREATE TABLE Role (id INT NOT NULL, name TEXT NOT NULL, PRIMARY KEY (id));')
-cur.execute('CREATE TABLE Person (id INT NOT NULL, key_uid TEXT NOT NULL, name TEXT NOT NULL, role_id INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (role_id) REFERENCES Role(id));')
-cur.execute('CREATE TABLE Door (id INT NOT NULL, public_key TEXT NOT NULL, PRIMARY KEY (id) );') 
-cur.execute('CREATE TABLE Role_Door (role_id INT NOT NULL, door_id INT NOT NULL, PRIMARY KEY (role_id, door_id), FOREIGN KEY (role_id) REFERENCES Role(id), FOREIGN KEY (door_id) REFERENCES Door(id) );') 
-cur.execute('CREATE TABLE Person_Door (person_id INT NOT NULL, door_id INT NOT NULL, PRIMARY KEY (person_id, door_id), FOREIGN KEY (person_id) REFERENCES Person(id), FOREIGN KEY (door_id) REFERENCES Door(id) );') 
+with open('createDB.sql', 'r') as content_file:
+	query = content_file.read()
 
-#Close cursor and database
-cur.close() 
+cur.execute(query)
+db.commit()
+ 
 db.close()
