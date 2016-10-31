@@ -1,11 +1,21 @@
-import MySQLdb
+import pymysql.cursors
+
+#Database Settings
+host = "sql7.freesqldatabase.com"
+user = "sql7142368"
+password = "y65TanAMCg"
+db = "sql7142368"
 
 #Open connection to Database and start cursor. We use the cursor to execute queries.
-db = MySQLdb.connect(host="sql7.freesqldatabase.com",    	# your host, usually localhost
-                     user="sql7142368",         			# your username
-                     passwd="y65TanAMCg",  					# your password
-                     db="sql7142368")      				  	# name of the data base					 
+db = pymysql.connect(host=host,
+                             user=user,
+                             password=password,
+                             db=db,
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)				 
 cur = db.cursor()
+
+
 
 #Function to add new entries to the Database
 #Add new Role to the Database
@@ -75,13 +85,3 @@ def getRoleDoor(role_id):
 	cur.execute(query)
 	return [list(a) for a in cur.fetchall()]
 	
-#Checks if a give Key UID has access to a certain door
-def hasPermission(key_uid, door_id):
-	person = getPersonByUID(key_uid)
-	
-	if ([door_id] in getPersonDoor(person[0])):
-		return True
-	elif ([door_id] in getRoleDoor(person[3])):
-		return True
-	else:
-		return False

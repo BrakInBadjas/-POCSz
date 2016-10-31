@@ -15,7 +15,7 @@ def decrypt(private_key, msg):
 	
 #Load a key from a file
 def loadKeyFromFile(file_name):
-	with open(file_name + '.txt', 'r') as content_file:
+	with open(file_name, 'r') as content_file:
 		content = content_file.read()
 	return RSA.importKey(content)
 	
@@ -23,3 +23,19 @@ def loadKeyFromFile(file_name):
 def loadKeyFromDatabase(door_id):
 	key = db.getDoorPublicKey(door_id)
 	return RSA.importKey(key)
+
+#Generte new keypair and save it in 2 seperate files
+def newKey():
+	random_generator = Random.new().read
+	key = RSA.generate(1024, random_generator)
+	
+	privKey = key.exportKey()
+	pubKey =  key.publickey().exportKey()
+	
+	f = open ('privateKey.pem', 'w')
+	f.write(privKey)
+	f.close()
+	
+	f = open ('publicKey.pem', 'w')
+	f.write(pubKey)
+	f.close()
