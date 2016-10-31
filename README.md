@@ -8,3 +8,10 @@ Created By:
 | [Danique Lummen](https://github.com/daniquel)         | S1853155       | daniquelummen@gmail.com
 | Jesper Simon                                          | S1820338       | jespersimon@live.nl
 | Apostolis Christoulias                                | S1833383       | apochri@hotmail.com
+
+
+# Python Requirements
+
+- PIP (For installing dependencies)
+- pycrypto
+- PyMySQL
