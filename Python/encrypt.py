@@ -33,9 +33,9 @@ def newKey():
 	pubKey =  key.publickey().exportKey()
 	
 	f = open ('privateKey.pem', 'w')
-	f.write(privKey)
+	f.write(privKey.decode("utf-8"))
 	f.close()
 	
 	f = open ('publicKey.pem', 'w')
-	f.write(pubKey)
+	f.write(pubKey.decode("utf-8"))
 	f.close()
