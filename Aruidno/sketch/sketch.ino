@@ -6,6 +6,8 @@
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 
+int door_ID = 1;
+
 void setup() {
   Serial.begin(9600);   // Initialize serial communications with the PC
   while (!Serial);    // Do nothing if no serial port is opened (added for Arduinos based on ATMEGA32U4)
@@ -24,10 +26,12 @@ void loop() {
     return;
   }
 
-  Serial.println("Card UID: " + getPresentUID());
+  String msg = String(door_ID) + ":" + getPresentUID();
+  Serial.println(msg);
 }
 
 String getPresentUID() {
+  // Dump UID
   String UIDstring = "";
   for (byte i = 0; i < mfrc522.uid.size; i++) {
     UIDstring = UIDstring + String(mfrc522.uid.uidByte[i]);

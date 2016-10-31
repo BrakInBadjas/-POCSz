@@ -1,17 +1,8 @@
-import Crypto
-from Crypto.PublicKey import RSA
-from Crypto import Random
-from Crypto.Hash import MD5
-
 import os
 import encrypt
 
 if not os.path.exists('privateKey.pem'):
     encrypt.newKey()
- 
-# Use a larger key length in practice...
-KEY_LENGTH = 2048  # Key size (in bits)
-random_gen = Random.new().read
  
 # Generate RSA private/public key pairs for both parties...
 keypair_snowden = encrypt.loadKeyFromFile('privateKey.pem')

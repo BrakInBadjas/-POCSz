@@ -15,3 +15,4 @@ Created By:
 - PIP (For installing dependencies)
 - pycrypto
 - PyMySQL
+- pySerial
