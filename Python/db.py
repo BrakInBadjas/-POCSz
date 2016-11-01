@@ -77,11 +77,22 @@ def getPersonByUID(key_uid):
 def getPersonDoor(user_id):
 	query = 'SELECT door_id FROM Person_Door WHERE person_id=' + str(user_id) + ';'
 	cur.execute(query)
-	return [list(a) for a in cur.fetchall()]
+	ids = []
+	for a in cur.fetchall():
+		ids.append(a['door_id'])
+	return ids
 
 #Returns a list of all doors a role has access to
 def getRoleDoor(role_id):
 	query = 'SELECT door_id FROM Role_Door WHERE role_id=' + str(role_id) + ';'
 	cur.execute(query)
-	return [list(a) for a in cur.fetchall()]
+	ids = []
+	for a in cur.fetchall():
+		ids.append(a['door_id'])
+	return ids
+
+def getDoorCount(door_id):
+	query = 'SELECT count(*) FROM Door WHERE id=' + str(door_id) + ';'
+	cur.execute(query)
+	return cur.fetchone()
 	
