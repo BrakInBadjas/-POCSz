@@ -37,7 +37,7 @@ def handleDoor(input):
     elif input.get('door') != None and input.get('key') != None:
         writeSerial('\n')
         auth_status = util.hasPermission(input['key'], input['door'])
-        writeSerial('server:connected,key:'+input['key']+',auth:'+str(auth_status))
+        writeSerial('server:connected,key:'+input['key']+'!,auth:'+str(auth_status))
     
 def writeSerial(data):
     if type(data) == str:

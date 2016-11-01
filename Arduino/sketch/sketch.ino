@@ -35,9 +35,6 @@ void loop() {
   if(received != ""){
     printToSerial(received);
     handleInput(received);
-    digitalWrite(GREEN_PIN, HIGH);
-    delay(200);
-    digitalWrite(GREEN_PIN, LOW);
   }
 }
 
@@ -75,8 +72,8 @@ void handleInput(String msg){
   String keypair1 = getValue(msg, ',', 1);
   if (keypair1 != ""){
     String key1 = getValue(keypair1, ':', 0);
-    String value1 = getValue(keypair1, ':', 1);
-    if(key1.equals("key") && value1.equals(read_key)){
+    String value1 = getValue(getValue(keypair1, ':', 1), '!', 0);
+    if(key1.equals("key") && value1 == read_key + "!"){
       String keypair2 = getValue(msg, ',', 2);
       String key2 = getValue(keypair2, ':', 0);
       String value2 = getValue(keypair2, ':', 1);
