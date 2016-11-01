@@ -3,12 +3,12 @@ import time
 import util
 
 ser = serial.Serial(
-    port='/dev/cu.usbmodem1421',
+    port='/dev/cu.usbmodem1411',
     baudrate=9600,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
     bytesize=serial.EIGHTBITS,
-        timeout=0)
+        timeout=10000)
 
 print("connected to: " + ser.portstr)
 
@@ -23,11 +23,8 @@ def handleInput(input):
         split_input = input.split(':')
         handled_input[split_input[0]] = split_input[1]
 
-    print(handled_input)
     if(handled_input.get('server') == None):
         handleDoor(handled_input)
-    elif(handled_input.get('auth') != None):
-        print(input)
 
 def handleDoor(input):
     writeSerial('server:received')
@@ -44,8 +41,7 @@ def handleDoor(input):
     
 def writeSerial(data):
     if type(data) == str:
-        print(data)
-        ser.write(data.encode('utf8'))
+        ser.write(data.encode('ascii'))
 
 while True:
     for c in ser.read():
