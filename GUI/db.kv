@@ -5,31 +5,55 @@
     color: 0, 0, 0, 1
     background_normal: ''
     background_down: 'bkgrnd-down-color.png'
-    background_color: .88, .88, .88, 0.5
+    background_color: .88, .88, .88, 1
     halign: 'center'
 	
-<MenuScreen>:
+<MenuScreen>
     GridLayout:
-        cols: 3
-        rows: 2
+        cols: 1
+        rows: 3
         padding: 10
         spacing: 10
-		
+
         Label:
-            text: ""
-        Label:
+            text: "Menu"
+			size_hint_y: None
+			height: 100
             font_size: 50
-            text: "What Do You Want To Do?"
-        Label:
-            text: ""
-        DbButton:
-            text: 'Select Entry\nFrom Database'
-            on_press: root.manager.current = 'retrieve'
-        DbButton:
-            text: "Add Entry\nTo Database"
-            on_press: root.manager.current = 'add'
-        DbButton:
-            text: "View\nAll Requests"
+        GridLayout:
+            cols: 2
+            rows: 2
+            spacing: 10
+            
+            DbButton:
+                text: "Add"
+            DbButton:
+                text: "Remove"
+            DbButton:
+                text: "Select"
+            GridLayout:
+                cols: 1
+                rows: 2
+                spacing: 10
+				
+                DbButton:
+                    text: "Open All Doors"
+                DbButton:
+                    text: "Close All Doors"
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+			height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+            
+
 
 <RetrieveScreen>:
     GridLayout:
