@@ -16,6 +16,9 @@ Created By:
 - pycrypto
 - PyMySQL
 - pySerial
+- Kivy
+
+To install Python Requirements, Please make sure you have PIP installed, then run setup.bat
 
 # Arduino Requirements
 ### Libraries
