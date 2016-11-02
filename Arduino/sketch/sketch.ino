@@ -78,8 +78,10 @@ void handleInput(String msg){
       String key2 = getValue(keypair2, ':', 0);
       String value2 = getValue(keypair2, ':', 1);
       if(key2.equals("auth")){
-        if(getValue(value2, 'e', 0) == "Tru"){
+        if(getValue(value2, 'e', 0) == "True"){
            allowEntry();
+        } else {
+          unallowedEntry();
         }
       } else {
         errorTone();
@@ -87,9 +89,8 @@ void handleInput(String msg){
     } else {
       errorTone();
     }
-  } else {
-    read_key = ""; 
   }
+  read_key = ""; 
 }
 
  String getValue(String data, char separator, int index){
@@ -149,13 +150,18 @@ void closeTone(){
 }
 
 void allowEntry() {
-  Serial.println("AUTHORIZED");
   digitalWrite(RED_PIN, LOW);
   digitalWrite(GREEN_PIN, HIGH);
   openTone();
   delay(2100);
   closeTone();
   digitalWrite(GREEN_PIN, LOW);
+  digitalWrite(RED_PIN, HIGH);
+}
+
+void unallowedEntry(){
+  digitalWrite(RED_PIN, LOW);
+  errorTone();
   digitalWrite(RED_PIN, HIGH);
 }
 

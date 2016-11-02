@@ -3,7 +3,7 @@ import time
 import util
 
 ser = serial.Serial(
-    port='/dev/cu.usbmodem1411',
+    port='/dev/cu.usbmodem1421',
     baudrate=9600,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
