@@ -1,0 +1,74 @@
+#:kivy 1.0.9
+	
+<DbButton@Button>:
+    font_size: 24
+    color: 0, 0, 0, 1
+    background_normal: ''
+    background_down: 'bkgrnd-down-color.png'
+    background_color: .88, .88, .88, 0.5
+    halign: 'center'
+	
+<MenuScreen>:
+    GridLayout:
+        cols: 3
+        rows: 2
+        padding: 10
+        spacing: 10
+		
+        Label:
+            text: ""
+        Label:
+            font_size: 50
+            text: "What Do You Want To Do?"
+        Label:
+            text: ""
+        DbButton:
+            text: 'Select Entry\nFrom Database'
+            on_press: root.manager.current = 'retrieve'
+        DbButton:
+            text: "Add Entry\nTo Database"
+            on_press: root.manager.current = 'add'
+        DbButton:
+            text: "View\nAll Requests"
+
+<RetrieveScreen>:
+    GridLayout:
+        cols: 3
+        rows: 2
+        padding: 10
+        spacing: 10
+		
+        DbButton:
+            text: "Return To\nMenu"
+            on_press: root.manager.current = 'menu'
+        DbButton:
+            text: "Retrieve\nPerson"
+        DbButton:
+            text: "Retrieve\nDoor"
+        DbButton:
+            text: "Retrieve\nRole"
+        DbButton:
+            text: "Retrieve Permission\nBy Person"
+        DbButton:
+            text: "Retrieve Permission\nBy Role"
+			
+<AddScreen>:
+    GridLayout:
+        cols: 3
+        rows: 2
+        padding: 10
+        spacing: 10
+		
+        DbButton:
+            text: "Return To\nMenu"
+            on_press: root.manager.current = 'menu'
+        DbButton:
+            text: "Add\nPerson"
+        DbButton:
+            text: "Add\nDoor"
+        DbButton:
+            text: "Add\nRole"
+        DbButton:
+            text: "Add Permission\nBy Person"
+        DbButton:
+            text: "Add Permission\nBy Role"			
