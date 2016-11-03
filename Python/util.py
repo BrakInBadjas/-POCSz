@@ -16,6 +16,7 @@ def addDoorIfNotExists(input):
 def hasPermission(key_uid, door_id):
     person = db.getPersonByUID(key_uid)
     if person is None:
+        print("Could not find \'Die\'")
         return False
 
     if (int(door_id) in db.getPersonDoor(person['id'])):
