@@ -2,7 +2,7 @@ import serial
 import time
 import util
 
-serial_port = '/dev/cu.usbmodem1421'
+serial_port = 'COM4'
 
 ser = serial.Serial(
     port=serial,
