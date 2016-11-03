@@ -38,20 +38,23 @@ def handleDoor(input):
         else:
             writeSerial('server:error')
     elif input.get('door') != None and input.get('key') != None:
-        UID = input.get('key')
-        print("encrypted: " +ord_String(UID));
-        UID = encryptDecrypt(UID)
-        print("decrypted: " +ord_String(UID));
+        UID = encryptDecrypt(input.get('key'))
+        print("key: " + UID)
         auth_status = util.hasPermission(UID, input['door'])
-        writeSerial('server:connected,key:'+input['key']+'!,auth:'+str(auth_status))
+        writeSerial('server:connected,key:'+input['key']+',auth:'+str(auth_status))
 
 def encryptDecrypt(input):
     output = xor_strings(input, key)
     return output
 
-def xor_strings(s,t):
-    """xor two strings together"""
-    return "".join(chr(ord(a)^ord(b)) for a,b in zip(s,t))
+def xor_strings(input,key):
+    temp = ""
+    inputList = bytes(input, 'utf8')
+    keyList = bytes(key, 'utf8')
+    for i in range(0,len(inputList)-1):
+        temp += str(inputList[i] ^ keyList[i])
+
+    return temp
 
 def ord_String(string):
     output = ""
@@ -61,12 +64,12 @@ def ord_String(string):
     
 def writeSerial(data):
     if type(data) == str:
+        print(data)
         ser.write(data.encode('utf-8'))
 
 while True:
     for c in ser.read():
         seq.append(chr(c))
-        print(str(c))
         if chr(c) == '\n':
             seq.pop()
         joined_seq = ''.join(str(v) for v in seq) #Make a string from array

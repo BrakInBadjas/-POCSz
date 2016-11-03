@@ -10,8 +10,8 @@
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 char* door_ID = "1";
-char key[] = {'K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W','K', 'C', 'Q', 'W'}; //Can be any chars, and any size array
-char read_key[4] = "";
+String key = "KCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQW";
+String read_key = "";
 
 void setup() {
   setupLights();
@@ -47,37 +47,49 @@ void serialEvent(){
   if(receivedStr.length() > 0){
     char received[receivedStr.length()];
     receivedStr.toCharArray(received, receivedStr.length());
-    printToSerial(received);
     handleInput(received);
   }
 }
 
 
 void setupDoor() {
-  char msg1[127];
-  strcpy(msg1, "door:");
-  strcat(msg1, door_ID);
-  strcat(msg1, ",status:online");
-  printToSerial(msg1);
+  char msg[127];
+  strcpy(msg, "door:");
+  strcat(msg, door_ID);
+  strcat(msg, ",status:online");
+  printToSerial(msg);
 }
 
 void handleNewCard(){
-  char msg1[127];
-  strcpy(msg1, "door:");
-  strcat(msg1, door_ID);
-  strcat(msg1, ",key:");
-  strcat(msg1, read_key);
-  
-  printToSerial(msg1);
+  String msg = "door:" + String(door_ID) + ",key:" + encrypt(read_key);
+  Serial.println(msg);
   readTone();
 }
 
+String encrypt(String msg){
+  String temp;
+  
+  byte result[sizeof(msg) * 2];
+  for(int i = 0; i < sizeof(msg) * 2; i++){
+    result[i] = (char) (msg.charAt(i) ^ key.charAt(i));
+  }
+  
+  String actresult = "";
+  for (int i = 0; i < sizeof(result); i++) {
+     actresult = actresult + (char) result[i]; 
+  }
+  return actresult;
+  
+}
+
 void getPresentUID() {
-  int i;
-  for(i = 0; i < mfrc522.uid.size; i++) {
-    read_key[i] = mfrc522.uid.uidByte[i] ^ key[i % (sizeof(key)/sizeof(char))];
+  // Dump UID
+  String UIDstring = "";
+  for (byte i = 0; i < mfrc522.uid.size; i++) {
+    UIDstring = UIDstring + String(mfrc522.uid.uidByte[i]);
   }
   mfrc522.PICC_HaltA();
+  read_key = UIDstring;
 }
 
 void printToSerial(char* msg){
@@ -88,13 +100,13 @@ void handleInput(String input){
   String keypair1 = getValue(input, ',', 1);
   if (keypair1 != ""){
     String key1 = getValue(keypair1, ':', 0);
-    String value1 = getValue(getValue(keypair1, ':', 1), '!', 0);
-    if(key1.equals("key") && value1 == read_key + '!'){
+    String value1 = encrypt(getValue(keypair1, ':', 1));
+    if(key1.equals("key") && compare(value1, read_key)){
       String keypair2 = getValue(input, ',', 2);
       String key2 = getValue(keypair2, ':', 0);
       String value2 = getValue(keypair2, ':', 1);
       if(key2.equals("auth")){
-        if(getValue(value2, 'e', 0) == "True"){
+        if(getValue(value2, 'e', 0) == "Tru"){
            allowEntry();
         } else {
           unallowedEntry();
@@ -106,7 +118,6 @@ void handleInput(String input){
       errorTone();
     }
   }
-  clean(read_key);
 }
 
  String getValue(String data, char separator, int index){
@@ -173,13 +184,25 @@ void allowEntry() {
   closeTone();
   digitalWrite(GREEN_PIN, LOW);
   digitalWrite(RED_PIN, HIGH);
-  clean(read_key);
 }
 
 void unallowedEntry(){
   digitalWrite(RED_PIN, LOW);
   errorTone();
   digitalWrite(RED_PIN, HIGH);
+}
+
+bool compare(String a, String b){
+  char aArray[sizeof(a)];
+  for(int i = 0; i < sizeof(a); i++){
+    aArray[i] = a.charAt(i);
+  }
+
+  char bArray[sizeof(b)];
+  for(int i = 0; i < sizeof(b); i++){
+    bArray[i] = b.charAt(i);
+  }
+  return strcmp(aArray, bArray);
 }
 
 void clean(char *var) {
