@@ -5,13 +5,13 @@ DROP TABLE IF EXISTS Door;
 DROP TABLE IF EXISTS Role;
 
 CREATE TABLE Role (
-	id INT NOT NULL,
-	name TEXT NOT NULL,
-	PRIMARY KEY (id)
+    id INT NOT NULL AUTO_INCREMENT,
+    name TEXT NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE Person (
-	id INT NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	key_uid TEXT NOT NULL,
 	name TEXT NOT NULL,
 	role_id INT NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE Door (
-	id INT NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	public_key TEXT NOT NULL,
 	PRIMARY KEY (id)
 );
@@ -41,13 +41,13 @@ CREATE TABLE Person_Door (
 	FOREIGN KEY (door_id) REFERENCES Door(id)
 );
 
-INSERT INTO Role VALUES (0, 'Client');
-INSERT INTO Role VALUES (1, 'Nurse');
-INSERT INTO Role VALUES (2, 'Doctor');
+INSERT INTO Role VALUES (null, 'Client');
+INSERT INTO Role VALUES (null, 'Nurse');
+INSERT INTO Role VALUES (null, 'Doctor');
 
-INSERT INTO Person VALUES (0, 'DC 7C 98 1E', 'Chris Witteveen', 0);
-INSERT INTO Person VALUES (1, 'AD 3B 4E 12', 'Milo Cesar', 0);
-INSERT INTO Person VALUES (2, '61 D2 E1 C4', 'Danique Lummen', 1);
-INSERT INTO Person VALUES (3, '82 DE C1 44', 'Suzanna Wentzel', 1);
-INSERT INTO Person VALUES (4, '8D 52 7F CA', 'Jesper Simon', 2);
-INSERT INTO Person VALUES (5, '1B 53 DE 4E', 'Apostolis Christoulias', 2);
+INSERT INTO Person VALUES (null, 'DC 7C 98 1E', 'Chris Witteveen', 3);
+INSERT INTO Person VALUES (null, 'AD 3B 4E 12', 'Milo Cesar', 3);
+INSERT INTO Person VALUES (null, '61 D2 E1 C4', 'Danique Lummen', 2);
+INSERT INTO Person VALUES (null, '82 DE C1 44', 'Suzanna Wentzel', 2);
+INSERT INTO Person VALUES (null, '8D 52 7F CA', 'Jesper Simon', 1);
+INSERT INTO Person VALUES (null, '1B 53 DE 4E', 'Apostolis Christoulias', 1);
