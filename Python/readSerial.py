@@ -5,7 +5,7 @@ import util
 serial_port = 'COM4'
 
 ser = serial.Serial(
-    port=serial,
+    port=serial_port,
     baudrate=9600,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,

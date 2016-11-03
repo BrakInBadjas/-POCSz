@@ -19,12 +19,15 @@ Created By:
 - Kivy
 
 To install Python Requirements, Please make sure you have PIP installed, then run setup.bat
+=======
 
 # Arduino Requirements
 ### Libraries
 - MFRC522
 
 # Instalation
+=======
+# Hardware instalation
 1. Install the pyton requirements
 2. Install the arduino requirements
 3. Upload the [sketch.ino](/Arduino/sketch/sketch.ino) to the Arduino
@@ -53,6 +56,7 @@ To install Python Requirements, Please make sure you have PIP installed, then ru
 | 5                     | Green LED +   |
 | GND                   | Green LED GND |
 
+=======
 # Database Requirements
 A database running MySQL
 
