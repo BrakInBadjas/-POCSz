@@ -63,7 +63,15 @@ class RemoveScreen(Screen):
     pass
     
 class RemovePersonScreen(Screen):
-    pass
+    def removePerson(self, person_id):
+        person_id = person_id.split(":")
+        
+        db.removeAllPermPers(person_id[1].strip())
+        db.removePerson(person_id[1].strip())
+        popup = Popup(title='Removed Person And Permissions',
+                    content=Label(text='Succesfully removed Person {} from Database'.format(person_id[1].strip()), font_size=20),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open()
     
 class RemoveRoleScreen(Screen):
     pass

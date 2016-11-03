@@ -96,3 +96,17 @@ def getDoorCount(door_id):
 	cur.execute(query)
 	return cur.fetchone()
 	
+def removePermPers(person_id, door_id):
+    query = 'Delete FROM Person_Door WHERE person_id=' + str(person_id) + ' AND door_id=' + str(door_id) +';'
+    cur.execute(query)
+    db.commit()
+    
+def removeAllPermPers(person_id):
+    query = 'Delete FROM Person_Door WHERE person_id=' + str(person_id) + ';'
+    cur.execute(query)
+    db.commit()
+    
+def removePerson(person_id,):
+    query = 'Delete FROM Person WHERE id=' + str(person_id) + ';'
+    cur.execute(query)
+    db.commit()

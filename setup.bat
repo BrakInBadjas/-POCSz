@@ -1,5 +1,5 @@
 @echo off
-echo Trying to upgrade pip/wheel/setuptools if updata is available
+echo Trying to upgrade pip/wheel/setuptools if update is available
 pip install --upgrade pip wheel setuptools
 
 echo.

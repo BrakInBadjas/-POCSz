@@ -337,6 +337,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_removepersonperson_id
             text: "Person_ID: "
             size_hint_y: None
             height: 50
@@ -352,6 +353,7 @@
             Label:
             DbButton:
                 text: "Remove"
+                on_press: root.removePerson(txt_removepersonperson_id.text)
             Label:
         GridLayout:
             cols: 2
