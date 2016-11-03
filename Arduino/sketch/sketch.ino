@@ -10,7 +10,8 @@
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 
-int door_ID = 1;
+char door_ID = '201';
+char key[] = {'K', 'C', 'Q', 'W', 'P'}; //Can be any chars, and any size array
 String read_key = "";
 
 void setup() {
@@ -27,7 +28,7 @@ void setup() {
 void loop() {
   // Look for new cards
   if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
-    handleNewCard(getPresentUID());
+    handleNewCard(String(getPresentUID()));
   }
 
   // say what you got:
@@ -38,6 +39,7 @@ void loop() {
   }
 }
 
+
 void setupDoor() {
   String msg = "door:"+ String(door_ID) +",status:online";
   printToSerial(msg);
@@ -45,6 +47,7 @@ void setupDoor() {
 
 void handleNewCard(String UID){
   read_key = UID;
+  
   String msg = "door:" + String(door_ID) + ",key:" + UID;
   printToSerial(msg);
   readTone();
@@ -52,20 +55,19 @@ void handleNewCard(String UID){
 
 String getPresentUID() {
   // Dump UID
-  String UIDstring = "";
-  for (byte i = 0; i < mfrc522.uid.size; i++) {
-    UIDstring = UIDstring + String(mfrc522.uid.uidByte[i]);
+  char output[4]; 
+  
+  int i;
+  for(i = 0; i < 4; i++) {
+    output[i] = mfrc522.uid.uidByte[i] ^ key[i % (sizeof(key)/sizeof(char))];
   }
+  
   mfrc522.PICC_HaltA();
-  return UIDstring;
-}
-
-String encryptMsg(String msg){
-  return msg;
+  return String(output);
 }
 
 void printToSerial(String msg){
-  Serial.println(encryptMsg(msg));
+  Serial.println(msg);
 }
 
 void handleInput(String msg){
@@ -164,6 +166,4 @@ void unallowedEntry(){
   errorTone();
   digitalWrite(RED_PIN, HIGH);
 }
-
-
 

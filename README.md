@@ -16,21 +16,29 @@ Created By:
 - pycrypto
 - PyMySQL
 - pySerial
+<<<<<<< HEAD
 - Kivy
 
 To install Python Requirements, Please make sure you have PIP installed, then run setup.bat
+=======
+>>>>>>> 2ad6628cc45cdc74b819079d8ebe4ef7849b1d12
 
 # Arduino Requirements
 ### Libraries
 - MFRC522
 
+<<<<<<< HEAD
 # Instalation
+=======
+# Hardware instalation
+>>>>>>> 2ad6628cc45cdc74b819079d8ebe4ef7849b1d12
 1. Install the pyton requirements
 2. Install the arduino requirements
 3. Upload the [sketch.ino](/Arduino/sketch/sketch.ino) to the Arduino
 4. Change the values in [db.py](/Python/db.py) and [readSerial.py](/Python/readSerial.py) to reflect your current environment and the db settings
 5. Run [readSerial.py](/Python/readSerial.py)
 
+<<<<<<< HEAD
 # Hardware setup
 ## RDIF
 | Connect arduino pin   | Connect To    |
@@ -53,6 +61,8 @@ To install Python Requirements, Please make sure you have PIP installed, then ru
 | 5                     | Green LED +   |
 | GND                   | Green LED GND |
 
+=======
+>>>>>>> 2ad6628cc45cdc74b819079d8ebe4ef7849b1d12
 # Database Requirements
 A database running MySQL
 
