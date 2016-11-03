@@ -1,8 +1,10 @@
 import serial
+import sys
 import time
 import util
 
 serial_port = '/dev/cu.usbmodem1421'
+key = "KCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQW"
 
 ser = serial.Serial(
     port=serial_port,
@@ -29,27 +31,45 @@ def handleInput(input):
         handleDoor(handled_input)
 
 def handleDoor(input):
-    writeSerial('server:received')
+    writeSerial('server:received\n')
     if input.get('status') != None:
-        writeSerial('\n')
         if util.addDoorIfNotExists(input):
             writeSerial('server:connected')
         else:
             writeSerial('server:error')
     elif input.get('door') != None and input.get('key') != None:
-        writeSerial('\n')
-        auth_status = util.hasPermission(input['key'], input['door'])
+        UID = input.get('key')
+        print("encrypted: " +ord_String(UID));
+        UID = encryptDecrypt(UID)
+        print("decrypted: " +ord_String(UID));
+        auth_status = util.hasPermission(UID, input['door'])
         writeSerial('server:connected,key:'+input['key']+'!,auth:'+str(auth_status))
+
+def encryptDecrypt(input):
+    output = xor_strings(input, key)
+    return output
+
+def xor_strings(s,t):
+    """xor two strings together"""
+    return "".join(chr(ord(a)^ord(b)) for a,b in zip(s,t))
+
+def ord_String(string):
+    output = ""
+    for char in string :
+        output = output + " " + str(ord(char))
+    return output
     
 def writeSerial(data):
     if type(data) == str:
-        ser.write(data.encode('ascii'))
+        ser.write(data.encode('utf-8'))
 
 while True:
     for c in ser.read():
-        seq.append(chr(c)) #convert from ANSII
+        seq.append(chr(c))
+        print(str(c))
+        if chr(c) == '\n':
+            seq.pop()
         joined_seq = ''.join(str(v) for v in seq) #Make a string from array
-
         if chr(c) == '\n': # Read full line
             handleInput(joined_seq)
             seq = []
