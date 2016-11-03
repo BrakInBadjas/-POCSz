@@ -7,10 +7,6 @@ echo Installing pyserial
 pip install pyserial
 
 echo.
-echo Installing pycrypto
-pip install pycrypto
-
-echo.
 echo If you get the error: 'Module winrandom not found'
 echo Go to file: (...\Lib\site-packages\Crypto\Random\OSRNG\nt.py) Inside your python folder
 echo Change: "import winrandom"

@@ -7,7 +7,7 @@
     background_down: 'bkgrnd-down-color.png'
     background_color: .88, .88, .88, 1
     halign: 'center'
-	
+    
 <MenuScreen>
     GridLayout:
         cols: 1
@@ -27,10 +27,13 @@
             
             DbButton:
                 text: "Add"
+                on_press: root.manager.current = 'add'
             DbButton:
                 text: "Remove"
+                on_press: root.manager.current = 'remove'
             DbButton:
                 text: "Select"
+                on_press: root.manager.current = 'select'
             GridLayout:
                 cols: 1
                 rows: 2
@@ -40,11 +43,41 @@
                     text: "Open All Doors"
                 DbButton:
                     text: "Close All Doors"
+                
+<AddScreen>:
+    GridLayout:
+        cols: 1
+        rows: 3
+        padding: 10
+        spacing: 10
+		
+        Label:
+            text: "Add"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        GridLayout:
+            cols: 2
+            rows: 2
+            spacing: 10
+            
+            DbButton:
+                text: "Person"
+                on_press: root.manager.current = 'addPerson'
+            DbButton:
+                text: "Role"
+                on_press: root.manager.current = 'addRole'
+            DbButton:
+                text: "Permission\nFor Person"
+                on_press: root.manager.current = 'addPermPers'
+            DbButton:
+                text: "Permission\nFor Role"
+                on_press: root.manager.current = 'addPermRole'
         GridLayout:
             cols: 2
             rows: 1
             size_hint_y: None
-			height: 50
+            height: 50
 
             Label:
                 text: ""
@@ -52,47 +85,671 @@
                 text: "Menu"
                 size_hint_x: None
                 width: 100
+                on_press: root.manager.current = 'menu'
+                
+<AddPersonScreen>:
+    GridLayout:
+        cols: 1
+        rows: 7
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Add - Person"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Key_UID: "
+            size_hint_y: None
+            height: 50
+        TextInput:
+            text: "Name: "
+            size_hint_y: None
+            height: 50
+        TextInput:
+            text: "Role_ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
             
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Add"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
 
-
-<RetrieveScreen>:
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<AddRoleScreen>:
     GridLayout:
-        cols: 3
-        rows: 2
+        cols: 1
+        rows: 5
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Add - Role"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Role Name: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            size_hint_y: None
+            height: 200
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Add"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<AddPermPersScreen>:
+    GridLayout:
+        cols: 1
+        rows: 6
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Add - Permissions Person"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Person_ID: "
+            size_hint_y: None
+            height: 50
+        TextInput:
+            text: "Door_ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Add"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<AddPermRoleScreen>:
+    GridLayout:
+        cols: 1
+        rows: 6
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Add - Permissions Role"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Role_ID: "
+            size_hint_y: None
+            height: 50
+        TextInput:
+            text: "Door_ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Add"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<RemoveScreen>:
+    GridLayout:
+        cols: 1
+        rows: 3
         padding: 10
         spacing: 10
 		
-        DbButton:
-            text: "Return To\nMenu"
-            on_press: root.manager.current = 'menu'
-        DbButton:
-            text: "Retrieve\nPerson"
-        DbButton:
-            text: "Retrieve\nDoor"
-        DbButton:
-            text: "Retrieve\nRole"
-        DbButton:
-            text: "Retrieve Permission\nBy Person"
-        DbButton:
-            text: "Retrieve Permission\nBy Role"
-			
-<AddScreen>:
+        Label:
+            text: "Remove"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        GridLayout:
+            cols: 2
+            rows: 2
+            spacing: 10
+            
+            DbButton:
+                text: "Person"
+                on_press: root.manager.current = 'removePerson'
+            DbButton:
+                text: "Role"
+                on_press: root.manager.current = 'removeRole'
+            DbButton:
+                text: "Permission\nFor Person"
+                on_press: root.manager.current = 'removePermPers'
+            DbButton:
+                text: "Permission\nFor Role"
+                on_press: root.manager.current = 'removePermRole'
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<RemovePersonScreen>:
     GridLayout:
-        cols: 3
-        rows: 2
+        cols: 1
+        rows: 5
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Remove - Person"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Person_ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            size_hint_y: None
+            height: 200
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Remove"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<RemoveRoleScreen>:
+    GridLayout:
+        cols: 1
+        rows: 5
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Remove - Role"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Role_ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            size_hint_y: None
+            height: 200
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Remove"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<RemovePermPersScreen>:
+    GridLayout:
+        cols: 1
+        rows: 6
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Remove - Permissions Person"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Person_ID: "
+            size_hint_y: None
+            height: 50
+        TextInput:
+            text: "Door_ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Remove"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<RemovePermRoleScreen>:
+    GridLayout:
+        cols: 1
+        rows: 6
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Remove - Permissions Role"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Role_ID: "
+            size_hint_y: None
+            height: 50
+        TextInput:
+            text: "Door_ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Remove"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<SelectScreen>:
+    GridLayout:
+        cols: 1
+        rows: 3
         padding: 10
         spacing: 10
 		
-        DbButton:
-            text: "Return To\nMenu"
-            on_press: root.manager.current = 'menu'
-        DbButton:
-            text: "Add\nPerson"
-        DbButton:
-            text: "Add\nDoor"
-        DbButton:
-            text: "Add\nRole"
-        DbButton:
-            text: "Add Permission\nBy Person"
-        DbButton:
-            text: "Add Permission\nBy Role"			
+        Label:
+            text: "Select"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        GridLayout:
+            cols: 3
+            rows: 3
+            spacing: 10
+            
+            DbButton:
+                text: "Person"
+                on_press: root.manager.current = 'selectPerson'
+            Label:
+            DbButton:
+                text: "Role"
+                on_press: root.manager.current = 'selectRole'
+            Label:
+            DbButton:
+                text: "Door"
+                on_press: root.manager.current = 'selectDoor'
+            Label:
+            DbButton:
+                text: "Permission\nFor Person"
+                on_press: root.manager.current = 'selectPermPers'
+            Label:
+            DbButton:
+                text: "Permission\nFor Role"
+                on_press: root.manager.current = 'selectPermRole'
+
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<SelectPersonScreen>:
+    GridLayout:
+        cols: 1
+        rows: 3
+        padding: 10
+        spacing: 10
+		
+        Label:
+            text: "Select - Person"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        GridLayout:
+            cols: 2
+            rows: 2
+            spacing: 10
+            
+            DbButton:
+                text: "ID"
+                on_press: root.manager.current = 'selectPersonID'
+            DbButton:
+                text: "Key_UID"
+                on_press: root.manager.current = 'selectPersonKey_UID'
+            DbButton:
+                text: "Name"
+                on_press: root.manager.current = 'selectPersonName'
+            DbButton:
+                text: "Role_ID"
+                on_press: root.manager.current = 'selectPersonRole_ID'
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<SelectPersonIDScreen>:
+    GridLayout:
+        cols: 1
+        rows: 5
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Select - Person - ID"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            size_hint_y: None
+            height: 200
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Select"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<SelectPersonKey_UIDScreen>:
+    GridLayout:
+        cols: 1
+        rows: 5
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Select - Person - Key_UID"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Key_UID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            size_hint_y: None
+            height: 200
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Select"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<SelectPersonNameScreen>:
+    GridLayout:
+        cols: 1
+        rows: 5
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Select - Person - Name"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Name: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            size_hint_y: None
+            height: 200
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Select"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
+                
+<SelectPersonRole_IDScreen>:
+    GridLayout:
+        cols: 1
+        rows: 5
+        padding: 10
+        spacing: 10
+        
+        Label:
+            text: "Select - Person - Role_ID"
+			size_hint_y: None
+			height: 100
+            font_size: 50
+        TextInput:
+            text: "Role_ID: "
+            size_hint_y: None
+            height: 50
+        Label:
+            text: ""
+            size_hint_y: None
+            height: 200
+            
+        GridLayout:
+            cols: 3
+            rows: 1
+            
+            Label:
+            DbButton:
+                text: "Select"
+            Label:
+        GridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: None
+            height: 50
+
+            Label:
+                text: ""
+            DbButton:
+                text: "Menu"
+                size_hint_x: None
+                width: 100
+                on_press: root.manager.current = 'menu'
