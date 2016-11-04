@@ -20,8 +20,7 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE Door (
-	id INT NOT NULL,
-	public_key TEXT NOT NULL,
+	id INT NOT NULL
 	PRIMARY KEY (id)
 );
 
@@ -51,7 +50,8 @@ INSERT INTO Person VALUES (null, '5792327d6be5ae9cb9dd7b1fbba52530992de8057d3fc5
 INSERT INTO Person VALUES (null, '7547efa482a345a2530c0e00ae5a443c3b5a31ad85f111debabcdb844a5dcc78', 'Jesper Simon', 1);
 INSERT INTO Person VALUES (null, 'ba6cc572469d6318af1ad510f24bce71156f2a5ca47aa2f70b43af71da81db08', 'Apostolis Christoulias', 1);
 
-INSERT INTO Door VALUES (1, '123');
+INSERT INTO Door VALUES (1);
+INSERT INTO Door VALUES (2);
 
 INSERT INTO Person_Door VALUES (3, 1);
 

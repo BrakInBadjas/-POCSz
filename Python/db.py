@@ -41,7 +41,7 @@ def addNewPerson(key_uid, name, role_id):
 	
 #Add a new Door to the Database
 def addNewDoor(door_id, public_key):
-	query = 'INSERT INTO Door VALUES ('+ str(door_id) +',\'' + public_key + '\');'
+	query = 'INSERT INTO Door VALUES ('+ str(door_id) +');'
 	cur.execute(query)
 	db.commit()	
 	
