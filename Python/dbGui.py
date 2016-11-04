@@ -27,7 +27,7 @@ class AddPersonScreen(Screen):
         db.addNewPerson(key_uid[1].strip(), name[1].strip(), role[1].strip())
         
         popup = Popup(title='Added Person',
-                    content=Label(text='Succesfully added {} to Database with Key_UID: {} and Role: {}'.format(name[1].strip(), key_uid[1].strip(), role[1].strip()), font_size=20),
+                    content=Label(text='Succesfully added {} to Database with:\nKey_UID: {}\nRole: {}'.format(name[1].strip(), key_uid[1].strip(), role[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
 

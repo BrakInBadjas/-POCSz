@@ -1,3 +1,24 @@
-0c02a7316ff5199d880c0b801bac67a654dbb68f26cfae801dc634b622a79184
-Suzanna Wentzel
-2
+Add role:
+	Assistant
+
+Get assistant ID
+
+Add person:
+	0c02a7316ff5199d880c0b801bac67a654dbb68f26cfae801dc634b622a79184
+	Suzanna Wentzel
+	[Assistant ID] -> 4
+
+Add permission for assistant to open door 2
+
+Check role id for client
+
+Add permission for clients to open door 1
+
+See which persons got access to door 2
+See which roles got acccess to door 2
+
+See the data of person with id 1
+
+Remove Suzanna from db again
+
+Remove assistant
