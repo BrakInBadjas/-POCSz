@@ -1,9 +1,11 @@
 import db
 
+#Check if there exists a door with the given door_id. Returns true if this is the case.
 def doorExists(door_ID):
     count = db.getDoorCount(door_ID)['count(*)'];
     return count > 0
 
+#Adds a door if the door does not yet exist.
 def addDoorIfNotExists(input):
     door_id = input['door']
     if not doorExists(door_id):
