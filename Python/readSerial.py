@@ -43,8 +43,10 @@ def handleDoor(input):
             writeSerial('server:error')
     elif input.get('door') != None and input.get('key') != None:
         UID = encryptDecrypt(input.get('key'))
-        print("key: " + hash(UID))
-        auth_status = util.hasPermission(UID, input['door'])
+        hashedUID = hash(UID)
+        print("key: " + UID)
+        print("hash: " + hashedUID)
+        auth_status = util.hasPermission(hashedUID, input.get('door'))
         writeSerial('server:connected,key:'+input['key']+',auth:'+str(auth_status))
 
 def encryptDecrypt(input):
