@@ -13,26 +13,28 @@ Created By:
 # Python Requirements
 
 - PIP (For installing dependencies)
-- pycrypto
 - PyMySQL
 - pySerial
 - Kivy
-
-To install Python Requirements, Please make sure you have PIP installed, then run setup.bat
 =======
 
 # Arduino Requirements
 ### Libraries
 - MFRC522
 
-# Instalation
+# Installation
 =======
-# Hardware instalation
-1. Install the pyton requirements
+# Software installation
+For MAC:
+1. Install the python requirements
 2. Install the arduino requirements
 3. Upload the [sketch.ino](/Arduino/sketch/sketch.ino) to the Arduino
 4. Change the values in [db.py](/Python/db.py) and [readSerial.py](/Python/readSerial.py) to reflect your current environment and the db settings
 5. Run [readSerial.py](/Python/readSerial.py)
+
+For Windows:
+1. Run setup.bat
+If there are problems with the Kivy installation, check the installation of Microsoft Visual Studio. Microsoft Visual Studio 2015 is required. 
 
 # Hardware setup
 ## RDIF
