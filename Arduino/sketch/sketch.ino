@@ -53,17 +53,14 @@ void serialEvent(){
 
 
 void setupDoor() {
-  char msg[127];
-  strcpy(msg, "door:");
-  strcat(msg, door_ID);
-  strcat(msg, ",status:online");
+  String msg = "door:" + (String) door_ID + ",status:online";
   printToSerial(msg);
 }
 
 void handleNewCard(){
-  Serial.println("server:debug,key:" + read_key);
+  printToSerial("server:debug,key:" + read_key);
   String msg = "door:" + String(door_ID) + ",key:" + encrypt(read_key);
-  Serial.println(msg);
+  printToSerial(msg);
   readTone();
 }
 
@@ -93,7 +90,7 @@ void getPresentUID() {
   read_key = UIDstring;
 }
 
-void printToSerial(char* msg){
+void printToSerial(String msg){
   Serial.println(msg);
 }
 

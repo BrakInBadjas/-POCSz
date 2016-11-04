@@ -2,6 +2,7 @@ import serial
 import sys
 import time
 import util
+import hashlib
 
 #Settings and database Setup
 
@@ -42,7 +43,7 @@ def handleDoor(input):
             writeSerial('server:error')
     elif input.get('door') != None and input.get('key') != None:
         UID = encryptDecrypt(input.get('key'))
-        print("key: " + UID)
+        print("key: " + hash(UID))
         auth_status = util.hasPermission(UID, input['door'])
         writeSerial('server:connected,key:'+input['key']+',auth:'+str(auth_status))
 
@@ -70,11 +71,9 @@ def writeSerial(data):
         print(data)
         ser.write(data.encode('utf-8'))
 
-def itersplit_into_x_chunks(string,x=10): # we assume here that x is an int and > 0
-    size = len(string)
-    chunksize = size//x
-    for pos in range(0, size, chunksize):
-        yield string[pos:pos+chunksize]
+def hash(UID):
+    # uuid is used to generate a random number
+    return hashlib.sha256(UID.encode()).hexdigest()
 
 while True:
     for c in ser.read():
