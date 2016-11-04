@@ -5,6 +5,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 
 import db
+import hashlib
 
 Builder.load_file('db.kv')
 
