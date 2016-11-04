@@ -35,7 +35,7 @@ For MAC:
  5. Run [readSerial.py](/Python/readSerial.py)
 
 For Windows:
- 1. Run setup.bat to install python requirements
+ 1. Run setup.bat to install python requirements\n
     If there are problems with the Kivy installation, check the installation of Microsoft Visual Studio. Microsoft Visual Studio 2015 is required. 
  2. Install the arduino requirements
  3. Upload the [sketch.ino](/Arduino/sketch/sketch.ino) to the Arduino
@@ -44,7 +44,7 @@ For Windows:
 
 
 # Hardware setup
-## RDIF
+## RFID
 | Connect arduino pin   | Connect To    |
 |:------------------:   |:---------:    |
 | 9                     |RFID RST       |
@@ -70,6 +70,7 @@ For Windows:
 A database running MySQL
 
 # Database setup
-1. Run [create.py](/Python/create.py)
-    Change the values in [create.py](/Python/create.py) to match your database settings
-    alternatively run [createDB.sql](/Python/createDB.sql) on your database
+1. Change the values in [create.py](/Python/create.py) to match your database settings
+2. Run [create.py](/Python/create.py)
+
+alternatively run [createDB.sql](/Python/createDB.sql) on your database
