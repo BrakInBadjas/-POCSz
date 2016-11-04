@@ -25,4 +25,9 @@ echo.
 echo Installing Kivy
 pip install kivy
 
+echo.
+echo.
+echo Launching GUI
+python Python/dbGui.py
+
 PAUSE
