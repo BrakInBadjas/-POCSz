@@ -8,6 +8,13 @@
     background_color: .88, .88, .88, 1
     halign: 'center'
     
+<DbButtonDissabled@Button>:
+    font_size: 24
+    color: 0, 0, 0, 1
+    background_normal: 'bkgrnd-down-color.png'
+    background_down: 'bkgrnd-down-color.png'
+    halign: 'center'
+    
 <MenuScreen>
     GridLayout:
         cols: 1
@@ -39,9 +46,9 @@
                 rows: 2
                 spacing: 10
 				
-                DbButton:
+                DbButtonDissabled:
                     text: "Open All Doors"
-                DbButton:
+                DbButtonDissabled:
                     text: "Close All Doors"
                 
 <AddScreen>:
@@ -382,6 +389,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_removerolerole_id
             text: "Role_ID: "
             size_hint_y: None
             height: 50
@@ -397,6 +405,7 @@
             Label:
             DbButton:
                 text: "Remove"
+                on_press: root.removeRole(txt_removerolerole_id.text)
             Label:
         GridLayout:
             cols: 2
@@ -425,10 +434,12 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_removepermpersperson_id
             text: "Person_ID: "
             size_hint_y: None
             height: 50
         TextInput:
+            id: txt_removepermpersdoor_id
             text: "Door_ID: "
             size_hint_y: None
             height: 50
@@ -442,6 +453,7 @@
             Label:
             DbButton:
                 text: "Remove"
+                on_press: root.removePermPers(txt_removepermpersperson_id.text, txt_removepermpersdoor_id.text)
             Label:
         GridLayout:
             cols: 2
@@ -470,10 +482,12 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_removepermrolerole_id
             text: "Role_ID: "
             size_hint_y: None
             height: 50
         TextInput:
+            id: txt_removepermroledoor_id
             text: "Door_ID: "
             size_hint_y: None
             height: 50
@@ -487,6 +501,7 @@
             Label:
             DbButton:
                 text: "Remove"
+                on_press: root.removePermRole(txt_removepermrolerole_id.text, txt_removepermroledoor_id.text)
             Label:
         GridLayout:
             cols: 2
@@ -527,9 +542,8 @@
                 text: "Role"
                 on_press: root.manager.current = 'selectRole'
             Label:
-            DbButton:
+            DbButtonDissabled:
                 text: "Door"
-                on_press: root.manager.current = 'selectDoor'
             Label:
             DbButton:
                 text: "Permission For\nPerson/Door"
@@ -609,6 +623,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectpersonid
             text: "ID: "
             size_hint_y: None
             height: 50
@@ -624,6 +639,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectPersonID(txt_selectpersonid.text)
             Label:
         GridLayout:
             cols: 2
@@ -652,6 +668,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectpersonkeyuid
             text: "Key_UID: "
             size_hint_y: None
             height: 50
@@ -667,6 +684,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectPersonKeyUID(txt_selectpersonkeyuid.text)
             Label:
         GridLayout:
             cols: 2
@@ -695,6 +713,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectpersonname
             text: "Name: "
             size_hint_y: None
             height: 50
@@ -710,6 +729,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectPersonName(txt_selectpersonname.text)
             Label:
         GridLayout:
             cols: 2
@@ -738,6 +758,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectpersonroleid
             text: "Role_ID: "
             size_hint_y: None
             height: 50
@@ -753,6 +774,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectPersonRole(txt_selectpersonroleid.text)
             Label:
         GridLayout:
             cols: 2
@@ -819,6 +841,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectroleid
             text: "ID: "
             size_hint_y: None
             height: 50
@@ -834,6 +857,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectRoleID(txt_selectroleid.text)
             Label:
         GridLayout:
             cols: 2
@@ -862,6 +886,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectrolename
             text: "Name: "
             size_hint_y: None
             height: 50
@@ -877,6 +902,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectRoleID(txt_selectrolename.text)
             Label:
         GridLayout:
             cols: 2
@@ -986,6 +1012,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectpermperspersonid
             text: "Person_ID: "
             size_hint_y: None
             height: 50
@@ -1001,6 +1028,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectPermPersPersonID(txt_selectpermperspersonid.text)
             Label:
         GridLayout:
             cols: 2
@@ -1029,6 +1057,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectpermpersdoorid
             text: "Door_ID: "
             size_hint_y: None
             height: 50
@@ -1044,6 +1073,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectPermPersDoorID(txt_selectpermpersdoorid.text)
             Label:
         GridLayout:
             cols: 2
@@ -1110,6 +1140,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectpermroleroleid
             text: "Role_ID: "
             size_hint_y: None
             height: 50
@@ -1125,6 +1156,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectPermRoleRoleID(txt_selectpermroleroleid.text)
             Label:
         GridLayout:
             cols: 2
@@ -1153,6 +1185,7 @@
 			height: 100
             font_size: 50
         TextInput:
+            id: txt_selectpermroledoorid
             text: "Door_ID: "
             size_hint_y: None
             height: 50
@@ -1168,6 +1201,7 @@
             Label:
             DbButton:
                 text: "Select"
+                on_press: root.selectPermRoleDoorID(txt_selectpermroledoorid.text)
             Label:
         GridLayout:
             cols: 2

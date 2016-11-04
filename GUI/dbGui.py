@@ -44,7 +44,7 @@ class AddPermPersScreen(Screen):
         
         db.addNewPersonDoor(person_id[1].strip(), door_id[1].strip())
         popup = Popup(title='Added Permission for Person',
-                    content=Label(text='Succesfully added permission for door {} for person {} to Database'.format(person_id[1].strip(), door_id[1].strip()), font_size=20),
+                    content=Label(text='Succesfully added permission for door {} for person {} to Database'.format(door_id[1].strip(), person_id[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
 
@@ -55,7 +55,7 @@ class AddPermRoleScreen(Screen):
         
         db.addNewRoleDoor(role_id[1].strip(), door_id[1].strip())
         popup = Popup(title='Added Permission for Role',
-                    content=Label(text='Succesfully added permission for door {} for role {} to Database'.format(role_id[1].strip(), door_id[1].strip()), font_size=20),
+                    content=Label(text='Succesfully added permission for door {} for role {} to Database'.format(door_id[1].strip(), role_id[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
     
@@ -74,13 +74,38 @@ class RemovePersonScreen(Screen):
         popup.open()
     
 class RemoveRoleScreen(Screen):
-    pass
+    def removeRole(self, role_id):
+        role_id = role_id.split(":")
+        
+        db.removeAllPermRole(role_id[1].strip())
+        db.removeRolePers(role_id[1].strip())
+        db.removeRole(role_id[1].strip())
+        popup = Popup(title='Removed Role And Permissions',
+                    content=Label(text='Succesfully removed Role {} from Database'.format(role_id[1].strip()), font_size=20),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open()
     
 class RemovePermPersScreen(Screen):
-    pass
+    def removePermPers(self, person_id, door_id):
+        person_id = person_id.split(":")
+        door_id = door_id.split(":")
+        
+        db.removePermPers(person_id[1].strip(), door_id[1].strip())
+        popup = Popup(title='Removed Permission for Person',
+                    content=Label(text='Succesfully removed permission for door {} for Person {} to Database'.format(door_id[1].strip(), person_id[1].strip()), font_size=20),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open()
 
 class RemovePermRoleScreen(Screen):
-    pass
+    def removePermRole(self, role_id, door_id):
+        role_id = role_id.split(":")
+        door_id = door_id.split(":")
+        
+        db.removePermRole(role_id[1].strip(), door_id[1].strip())
+        popup = Popup(title='Removed Permission for Role',
+                    content=Label(text='Succesfully removed permission for door {} for Role {} to Database'.format(door_id[1].strip(), role_id[1].strip()), font_size=20),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open()
     
 class SelectScreen(Screen):
     pass
@@ -89,25 +114,72 @@ class SelectPersonScreen(Screen):
     pass
     
 class SelectPersonIDScreen(Screen):
-    pass
+    def selectPersonID(self, person_id):
+        person_id = person_id.split(":")
+        
+        person = db.getPerson(person_id[1].strip())
+        popup = Popup(title = 'Results',
+                    content=Label(text='ID: {}, Key_UID: {}, Name: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open()        
 
 class SelectPersonKey_UIDScreen(Screen):
-    pass
+    def selectPersonKeyUID(self, key_uid):
+        key_uid = key_uid.split(":")
+        
+        person = db.getPersonByUID(key_uid[1].strip())
+        popup = Popup(title = 'Results',
+                    content=Label(text='ID: {}, Key_UID: {}, Name: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open()
 
 class SelectPersonNameScreen(Screen):
-    pass
+    def selectPersonName(self, name):
+        name = name.split(":")
+        
+        person = db.getPersonByName(name[1].strip())
+        popup = Popup(title = 'Results',
+                    content=Label(text='ID: {}, Key_UID: {}, Name: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open()
 
 class SelectPersonRole_IDScreen(Screen):
-    pass    
+    def selectPersonRole(self, role_id):
+        role_id = role_id.split(":")
+        
+        persons = db.getPersonByRole(role_id[1].strip())
+        string = ''
+        
+        for person in persons:
+            string += 'ID: {}, Key_UID: {}, Name: {}, Role_ID: {}\n'.format(person["id"],person["key_uid"],person["name"],person["role_id"])
+        
+        popup = Popup(title = 'Results',
+                    content=Label(text=string),
+                    size_hint=(None, None), size=(800, 400))
+        popup.open()  
 
 class SelectRoleScreen(Screen):
     pass
     
 class SelectRoleIDScreen(Screen):
-    pass
+    def selectRoleID(self, role_id):
+        role_id = role_id.split(":")
+        
+        role = db.getRole(role_id[1].strip())
+        popup = Popup(title = 'Results',
+                    content=Label(text='ID: {}, Name: {}'.format(role["id"],role["name"])),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open()      
     
 class SelectRoleNameScreen(Screen):
-    pass
+    def selectRoleID(self, role_name):
+        role_name = role_name.split(":")
+        
+        role = db.getRoleByName(role_name[1].strip())
+        popup = Popup(title = 'Results',
+                    content=Label(text='ID: {}, Name: {}'.format(role["id"],role["name"])),
+                    size_hint=(None, None), size=(800, 200))
+        popup.open() 
     
 class SelectDoorScreen(Screen):
     pass
@@ -116,19 +188,67 @@ class SelectPermPersScreen(Screen):
     pass
     
 class SelectPermPersPerson_IDScreen(Screen):
-    pass
+    def selectPermPersPersonID(self, person_id):
+        person_id = person_id.split(":")
+        
+        perms = db.getPersonDoor(person_id[1].strip())
+        string = "Person with ID: {} has access to doors:\n".format(person_id[1].strip())
+        
+        for perm in perms:
+            string += "Door ID: {}\n".format(perm)
+        
+        popup = Popup(title = 'Results',
+                    content=Label(text=string),
+                    size_hint=(None, None), size=(800, 400))
+        popup.open()  
     
 class SelectPermPersDoor_IDScreen(Screen):
-    pass
+    def selectPermPersDoorID(self, door_id):
+        door_id = door_id.split(":")
+        
+        perms = db.getDoorPerson(door_id[1].strip())
+        string = "Door with ID: {} can be accessed by:\n".format(door_id[1].strip())
+        
+        for perm in perms:
+            string += "Person ID: {}\n".format(perm)
+        
+        popup = Popup(title = 'Results',
+                    content=Label(text=string),
+                    size_hint=(None, None), size=(800, 400))
+        popup.open()
     
 class SelectPermRoleScreen(Screen):
     pass
     
 class SelectPermRoleRole_IDScreen(Screen):
-    pass
+    def selectPermRoleRoleID(self, role_id):
+        role_id = role_id.split(":")
+        
+        perms = db.getRoleDoor(role_id[1].strip())
+        string = "Role with ID: {} has access to doors:\n".format(role_id[1].strip())
+        
+        for perm in perms:
+            string += "Door ID: {}\n".format(perm)
+        
+        popup = Popup(title = 'Results',
+                    content=Label(text=string),
+                    size_hint=(None, None), size=(800, 400))
+        popup.open() 
     
 class SelectPermRoleDoor_IDScreen(Screen):
-    pass
+    def selectPermRoleDoorID(self, door_id):
+        door_id = door_id.split(":")
+        
+        perms = db.getDoorRole(door_id[1].strip())
+        string = "Door with ID: {} can be accessed by:\n".format(door_id[1].strip())
+        
+        for perm in perms:
+            string += "Role ID: {}\n".format(perm)
+        
+        popup = Popup(title = 'Results',
+                    content=Label(text=string),
+                    size_hint=(None, None), size=(800, 400))
+        popup.open()
     
 # Create the screen manager
 sm = ScreenManager(transition=NoTransition())
