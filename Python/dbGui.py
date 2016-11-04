@@ -8,12 +8,15 @@ import db
 
 Builder.load_file('db.kv')
 
+#Creates functions from the menuscreen
 class MenuScreen(Screen):
     pass
 
+#Creates functions from the addscreen
 class AddScreen(Screen):
 	pass
-    
+
+#Creates the functions of the screen where you add a person.    
 class AddPersonScreen(Screen):
     def addPerson(self, key_uid, name, role):
         key_uid = key_uid.split(":")
@@ -26,7 +29,8 @@ class AddPersonScreen(Screen):
                     content=Label(text='Succesfully added {} to Database with Key_UID: {} and Role: {}'.format(name[1].strip(), key_uid[1].strip(), role[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
-    
+
+#Creates the functions of the screen that adds a role.       
 class AddRoleScreen(Screen):
     def addRole(self, name):
         name = name.split(":")
@@ -36,7 +40,8 @@ class AddRoleScreen(Screen):
                     content=Label(text='Succesfully added {} to Database'.format(name[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
-    
+
+#Creates the functions of a screen that adds a permission for a person.        
 class AddPermPersScreen(Screen):
     def addPermPers(self, person_id, door_id):
         person_id = person_id.split(":")
@@ -48,6 +53,7 @@ class AddPermPersScreen(Screen):
                     size_hint=(None, None), size=(800, 200))
         popup.open()
 
+#Creates the functions of a screen that adds a permission for a role.
 class AddPermRoleScreen(Screen):
     def addPermRole(self, role_id, door_id):
         role_id = role_id.split(":")
@@ -58,10 +64,12 @@ class AddPermRoleScreen(Screen):
                     content=Label(text='Succesfully added permission for door {} for role {} to Database'.format(door_id[1].strip(), role_id[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
-    
+
+#Creates the functions for the removescreen.        
 class RemoveScreen(Screen):
     pass
-    
+
+#Creates the functions of a screen that removes a person.    
 class RemovePersonScreen(Screen):
     def removePerson(self, person_id):
         person_id = person_id.split(":")
@@ -72,7 +80,8 @@ class RemovePersonScreen(Screen):
                     content=Label(text='Succesfully removed Person {} from Database'.format(person_id[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
-    
+
+#Creates the functions of a screen that removes a role.        
 class RemoveRoleScreen(Screen):
     def removeRole(self, role_id):
         role_id = role_id.split(":")
@@ -84,7 +93,8 @@ class RemoveRoleScreen(Screen):
                     content=Label(text='Succesfully removed Role {} from Database'.format(role_id[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
-    
+
+#Creates the functions of a screen that removes a permission of a person.        
 class RemovePermPersScreen(Screen):
     def removePermPers(self, person_id, door_id):
         person_id = person_id.split(":")
@@ -96,6 +106,7 @@ class RemovePermPersScreen(Screen):
                     size_hint=(None, None), size=(800, 200))
         popup.open()
 
+#Creates the functions of a screen that removes a permission of a role.
 class RemovePermRoleScreen(Screen):
     def removePermRole(self, role_id, door_id):
         role_id = role_id.split(":")
@@ -106,13 +117,16 @@ class RemovePermRoleScreen(Screen):
                     content=Label(text='Succesfully removed permission for door {} for Role {} to Database'.format(door_id[1].strip(), role_id[1].strip()), font_size=20),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
-    
+
+#Creates the functions of the selectscreen.        
 class SelectScreen(Screen):
     pass
-    
+
+#Creates the functions of the selectpersonscreen.    
 class SelectPersonScreen(Screen):
     pass
-    
+
+#Creates the functions of a screen that selects a person by person_id.    
 class SelectPersonIDScreen(Screen):
     def selectPersonID(self, person_id):
         person_id = person_id.split(":")
@@ -123,6 +137,7 @@ class SelectPersonIDScreen(Screen):
                     size_hint=(None, None), size=(800, 200))
         popup.open()        
 
+#Creates the functions of a screen that selects a person by key_uid. 
 class SelectPersonKey_UIDScreen(Screen):
     def selectPersonKeyUID(self, key_uid):
         key_uid = key_uid.split(":")
@@ -133,6 +148,7 @@ class SelectPersonKey_UIDScreen(Screen):
                     size_hint=(None, None), size=(800, 200))
         popup.open()
 
+#Creates the functions of a screen that selects a person by name. 
 class SelectPersonNameScreen(Screen):
     def selectPersonName(self, name):
         name = name.split(":")
@@ -143,6 +159,7 @@ class SelectPersonNameScreen(Screen):
                     size_hint=(None, None), size=(800, 200))
         popup.open()
 
+#Creates the functions of a screen that selects a person by role_id.
 class SelectPersonRole_IDScreen(Screen):
     def selectPersonRole(self, role_id):
         role_id = role_id.split(":")
@@ -158,9 +175,11 @@ class SelectPersonRole_IDScreen(Screen):
                     size_hint=(None, None), size=(800, 400))
         popup.open()  
 
+#Create the functions of the selectrolescreen.
 class SelectRoleScreen(Screen):
     pass
-    
+
+#Creates the functions of a screen that selects a role by role_id.     
 class SelectRoleIDScreen(Screen):
     def selectRoleID(self, role_id):
         role_id = role_id.split(":")
@@ -170,7 +189,8 @@ class SelectRoleIDScreen(Screen):
                     content=Label(text='ID: {}, Name: {}'.format(role["id"],role["name"])),
                     size_hint=(None, None), size=(800, 200))
         popup.open()      
-    
+
+#Creates the functions of a screen that selects a role by name.     
 class SelectRoleNameScreen(Screen):
     def selectRoleID(self, role_name):
         role_name = role_name.split(":")
@@ -180,13 +200,16 @@ class SelectRoleNameScreen(Screen):
                     content=Label(text='ID: {}, Name: {}'.format(role["id"],role["name"])),
                     size_hint=(None, None), size=(800, 200))
         popup.open() 
-    
+
+#Creates the functions of the selectdoorscreen.        
 class SelectDoorScreen(Screen):
     pass
-    
+
+#Creates the functions of the selectpermpersscreen.    
 class SelectPermPersScreen(Screen):
     pass
-    
+
+#Creates the functions of a screen that selects a permission of a person by person_id.     
 class SelectPermPersPerson_IDScreen(Screen):
     def selectPermPersPersonID(self, person_id):
         person_id = person_id.split(":")
@@ -201,7 +224,8 @@ class SelectPermPersPerson_IDScreen(Screen):
                     content=Label(text=string),
                     size_hint=(None, None), size=(800, 400))
         popup.open()  
-    
+
+#Creates the functions of a screen that selects a permission of a person by door_id.          
 class SelectPermPersDoor_IDScreen(Screen):
     def selectPermPersDoorID(self, door_id):
         door_id = door_id.split(":")
@@ -216,10 +240,12 @@ class SelectPermPersDoor_IDScreen(Screen):
                     content=Label(text=string),
                     size_hint=(None, None), size=(800, 400))
         popup.open()
-    
+
+#Creates the functions of the selectpermrolescreen.        
 class SelectPermRoleScreen(Screen):
     pass
-    
+
+#Creates the functions of a screen that selects a permission of a role by role_id.      
 class SelectPermRoleRole_IDScreen(Screen):
     def selectPermRoleRoleID(self, role_id):
         role_id = role_id.split(":")
@@ -234,7 +260,8 @@ class SelectPermRoleRole_IDScreen(Screen):
                     content=Label(text=string),
                     size_hint=(None, None), size=(800, 400))
         popup.open() 
-    
+
+#Creates the functions of a screen that selects a permission of a role by door_id.          
 class SelectPermRoleDoor_IDScreen(Screen):
     def selectPermRoleDoorID(self, door_id):
         door_id = door_id.split(":")

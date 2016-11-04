@@ -15,6 +15,7 @@ db = pymysql.connect(host=host,
                              cursorclass=pymysql.cursors.DictCursor)				 
 cur = db.cursor()
 
+# Reloads the connection to the database.
 def reloadConnection():
 	global db
 	global cur 
@@ -25,7 +26,7 @@ def reloadConnection():
 	
 	cur = db.cursor()
 
-#Function to add new entries to the Database
+#Functions to add new entries to the Database
 #Add new Role to the Database
 def addNewRole(role_name):
 	query = 'INSERT INTO Role VALUES (NULL,\'' + role_name + '\');'
@@ -63,19 +64,20 @@ def getRole(role_id):
     query = 'SELECT * FROM Role WHERE id=' + str(role_id) + ';'
     cur.execute(query)
     return cur.fetchone()
-    
+   
+#Returns the role of a person for the person name.   
 def getRoleByName(role_name):
     reloadConnection()
     query = 'SELECT * FROM Role WHERE name=\'' + str(role_name) + '\';'
     cur.execute(query)
     return cur.fetchone()
 	
-#Returns the public_key belonging to the door_id
-def getDoorPublicKey(door_id):
-    reloadConnection()
-    query = 'SELECT public_key FROM Door WHERE id=' + str(door_id) + ';'
-    cur.execute(query)
-    return cur.fetchone()[0]
+# #Returns the public_key belonging to the door_id
+# def getDoorPublicKey(door_id):
+    # reloadConnection()
+    # query = 'SELECT public_key FROM Door WHERE id=' + str(door_id) + ';'
+    # cur.execute(query)
+    # return cur.fetchone()[0]
 
 #Return a 4-tuple of (ID, Key UID, Name, Role ID) belonging to the user_id
 def getPerson(user_id):
@@ -89,13 +91,15 @@ def getPersonByUID(key_uid):
     query = 'SELECT * FROM Person WHERE key_uid=\'' + str(key_uid) + '\';'
     cur.execute(query)
     return cur.fetchone()
-	
+
+#Return a 4-tuple of (ID, Key UID, Name, Role ID) belonging to the person name	
 def getPersonByName(name):
     reloadConnection()
     query = 'SELECT * FROM Person WHERE name=\"' + str(name) + '\";'
     cur.execute(query)
     return cur.fetchone() 
-    
+ 
+#Return a 4-tuple of (ID, Key UID, Name, Role ID) belonging to the role
 def getPersonByRole(role_id):
     reloadConnection()
     query = 'SELECT * FROM Person WHERE role_id=\"' + str(role_id) + '\";'
@@ -111,7 +115,8 @@ def getPersonDoor(user_id):
     for a in cur.fetchall():
         ids.append(a['door_id'])
     return ids
-    
+ 
+#Returns a list of all persons who have access to a door 
 def getDoorPerson(door_id):
     reloadConnection()
     query = 'SELECT person_id FROM Person_Door WHERE door_id=' + str(door_id) + ';'
@@ -130,7 +135,8 @@ def getRoleDoor(role_id):
     for a in cur.fetchall():
         ids.append(a['door_id'])
     return ids
-    
+ 
+#Returns a list of all roles who have access to a door 
 def getDoorRole(door_id):
     reloadConnection()
     query = 'SELECT role_id FROM Role_Door WHERE door_id=' + str(door_id) + ';'
@@ -140,42 +146,50 @@ def getDoorRole(door_id):
         ids.append(a['role_id'])
     return ids
 
+#Returns the amount of doors
 def getDoorCount(door_id):
     reloadConnection()
     query = 'SELECT count(*) FROM Door WHERE id=' + str(door_id) + ';'
     cur.execute(query)
     return cur.fetchone()
-	
+
+#Remove a permission from a person	
 def removePermPers(person_id, door_id):
     query = 'Delete FROM Person_Door WHERE person_id=' + str(person_id) + ' AND door_id=' + str(door_id) +';'
     cur.execute(query)
     db.commit()
-    
+
+#Remove all permissions from a person    
 def removeAllPermPers(person_id):
     query = 'Delete FROM Person_Door WHERE person_id=' + str(person_id) + ';'
     cur.execute(query)
     db.commit()
-    
+
+#Remove a person    
 def removePerson(person_id,):
     query = 'Delete FROM Person WHERE id=' + str(person_id) + ';'
     cur.execute(query)
     db.commit()
-    
+ 
+#Remove a persmission from a role 
 def removePermRole(role_id, door_id):
     query = 'Delete FROM Role_Door WHERE role_id=' + str(role_id) + ' AND door_id=' + str(door_id) +';'
     cur.execute(query)
     db.commit()
-    
+ 
+#Remove all permissions from a role 
 def removeAllPermRole(role_id):
     query = 'Delete FROM Role_Door WHERE role_id=' + str(role_id) + ';'
     cur.execute(query)
     db.commit()
-    
+ 
+#Remove role from a person 
 def removeRolePers(role_id):
     query = 'UPDATE Person SET role_id=NULL WHERE role_id=' + str(role_id) + ';'
     cur.execute(query)
     db.commit()
-    
+
+#Remove role    
 def removeRole(role_id,):
     query = 'Delete FROM Role WHERE id=' + str(role_id) + ';'
     cur.execute(query)
