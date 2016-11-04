@@ -1,6 +1,0 @@
-Project:
-	Create a security system for nursing homes
-	
-Ideas:
-	Hash and Salt card id's
-	
