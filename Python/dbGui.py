@@ -119,7 +119,7 @@ class SelectPersonIDScreen(Screen):
         
         person = db.getPerson(person_id[1].strip())
         popup = Popup(title = 'Results',
-                    content=Label(text='ID: {}, Key_UID: {}, Name: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
+                    content=Label(text='ID: {}, Key_UID: {}\nName: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
                     size_hint=(None, None), size=(800, 200))
         popup.open()        
 
@@ -129,7 +129,7 @@ class SelectPersonKey_UIDScreen(Screen):
         
         person = db.getPersonByUID(key_uid[1].strip())
         popup = Popup(title = 'Results',
-                    content=Label(text='ID: {}, Key_UID: {}, Name: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
+                    content=Label(text='ID: {}, Key_UID: {}\nName: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
 
@@ -139,7 +139,7 @@ class SelectPersonNameScreen(Screen):
         
         person = db.getPersonByName(name[1].strip())
         popup = Popup(title = 'Results',
-                    content=Label(text='ID: {}, Key_UID: {}, Name: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
+                    content=Label(text='ID: {}, Key_UID: {}\nName: {}, Role_ID: {}'.format(person["id"],person["key_uid"],person["name"],person["role_id"])),
                     size_hint=(None, None), size=(800, 200))
         popup.open()
 
@@ -151,7 +151,7 @@ class SelectPersonRole_IDScreen(Screen):
         string = ''
         
         for person in persons:
-            string += 'ID: {}, Key_UID: {}, Name: {}, Role_ID: {}\n'.format(person["id"],person["key_uid"],person["name"],person["role_id"])
+            string += 'ID: {}, Key_UID: {}\n-- Name: {}, Role_ID: {}\n'.format(person["id"],person["key_uid"],person["name"],person["role_id"])
         
         popup = Popup(title = 'Results',
                     content=Label(text=string),
