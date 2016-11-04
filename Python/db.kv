@@ -530,25 +530,19 @@
 			height: 100
             font_size: 50
         GridLayout:
-            cols: 3
-            rows: 3
+            cols: 2
+            rows: 2
             spacing: 10
             
             DbButton:
                 text: "Person"
                 on_press: root.manager.current = 'selectPerson'
-            Label:
             DbButton:
                 text: "Role"
                 on_press: root.manager.current = 'selectRole'
-            Label:
-            DbButtonDissabled:
-                text: "Door"
-            Label:
             DbButton:
                 text: "Permission For\nPerson/Door"
                 on_press: root.manager.current = 'selectPermPers'
-            Label:
             DbButton:
                 text: "PermissionFor\nRole/Door"
                 on_press: root.manager.current = 'selectPermRole'

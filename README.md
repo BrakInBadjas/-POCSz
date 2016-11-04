@@ -11,6 +11,7 @@ Created By:
 
 
 # Python Requirements
+Please make sure you have microsoft visual studio 2015 installed
 
 - PIP (For installing dependencies)
 - PyMySQL
@@ -34,8 +35,13 @@ For MAC:
 5. Run [readSerial.py](/Python/readSerial.py)
 
 For Windows:
-1. Run setup.bat
+1. Run setup.bat to install python requirements
 If there are problems with the Kivy installation, check the installation of Microsoft Visual Studio. Microsoft Visual Studio 2015 is required. 
+2. Install the arduino requirements
+3. Upload the [sketch.ino](/Arduino/sketch/sketch.ino) to the Arduino
+4. Change the values in [db.py](/Python/db.py) and [readSerial.py](/Python/readSerial.py) to reflect your current environment and the db settings
+5. Run [readSerial.py](/Python/readSerial.py)
+
 
 # Hardware setup
 ## RDIF
@@ -65,4 +71,5 @@ A database running MySQL
 
 # Database setup
 1. Run [create.py](/Python/create.py)
+    Change the values in [create.py](/Python/create.py) to match your database settings
     alternatively run [createDB.sql](/Python/createDB.sql) on your database
