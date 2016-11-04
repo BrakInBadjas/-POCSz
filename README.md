@@ -13,21 +13,53 @@ Created By:
 # Python Requirements
 
 - PIP (For installing dependencies)
-- pycrypto
 - PyMySQL
 - pySerial
+- Kivy
+
+=======
 
 # Arduino Requirements
 ### Libraries
 - MFRC522
 
-# Hardware instalation
-1. Install the pyton requirements
+# Installation
+=======
+# Software installation
+For MAC:
+1. Install the python requirements
 2. Install the arduino requirements
 3. Upload the [sketch.ino](/Arduino/sketch/sketch.ino) to the Arduino
 4. Change the values in [db.py](/Python/db.py) and [readSerial.py](/Python/readSerial.py) to reflect your current environment and the db settings
 5. Run [readSerial.py](/Python/readSerial.py)
 
+For Windows:
+1. Run setup.bat
+If there are problems with the Kivy installation, check the installation of Microsoft Visual Studio. Microsoft Visual Studio 2015 is required. 
+
+# Hardware setup
+## RDIF
+| Connect arduino pin   | Connect To    |
+|:------------------:   |:---------:    |
+| 9                     |RFID RST       |
+| 10                    |RFID SDA       |
+| 11                    |RFID MOSI      |
+| 12                    |RFID MISO      |
+| 13                    |RFID SCK       |
+| 3.3V                  |RFID 3.3V      |
+| GND                   |RFID GND       |
+
+## Extra's
+| Connect arduino pin   | Connect To    |
+|:------------------:   |:---------:    |
+| 2                     | Buzzer 5V     |
+| GND                   | Buzzer Ground |
+| 3                     | Red LED +     |
+| GND                   | Red LED GND   |
+| 5                     | Green LED +   |
+| GND                   | Green LED GND |
+
+=======
 # Database Requirements
 A database running MySQL
 

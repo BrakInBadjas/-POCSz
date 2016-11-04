@@ -9,8 +9,8 @@
 #define BUZZER          2
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
-
-int door_ID = 1;
+char* door_ID = "1";
+String key = "AyCLCmHvJao59iDYh0hPfTTZchjXacOXrIMBNtn35fPOjqYkWUFiLwCGh1HRcm";
 String read_key = "";
 
 void setup() {
@@ -27,58 +27,84 @@ void setup() {
 void loop() {
   // Look for new cards
   if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
-    handleNewCard(getPresentUID());
+    getPresentUID();
+    handleNewCard();
+  }
+}
+
+void serialEvent(){
+  // say what you got:
+  String receivedStr;
+
+  while(Serial.available()) {
+    delay(3);
+    if (Serial.available()>0){
+      char c = Serial.read();
+      receivedStr += c;
+    }
   }
 
-  // say what you got:
-  String received = Serial.readString();
-  if(received != ""){
-    printToSerial(received);
+  if(receivedStr.length() > 0){
+    char received[receivedStr.length()];
+    receivedStr.toCharArray(received, receivedStr.length());
     handleInput(received);
   }
 }
 
+
 void setupDoor() {
-  String msg = "door:"+ String(door_ID) +",status:online";
+  String msg = "door:" + (String) door_ID + ",status:online";
   printToSerial(msg);
 }
 
-void handleNewCard(String UID){
-  read_key = UID;
-  String msg = "door:" + String(door_ID) + ",key:" + UID;
+void handleNewCard(){
+  printToSerial("server:debug,key:" + read_key);
+  String msg = "door:" + String(door_ID) + ",key:" + encrypt(read_key);
   printToSerial(msg);
   readTone();
 }
 
-String getPresentUID() {
+String encrypt(String msg){
+  String temp;
+  
+  byte result[sizeof(msg) * 2];
+  for(int i = 0; i < sizeof(msg) * 2; i++){
+    result[i] = (char) (msg.charAt(i) ^ key.charAt(i));
+  }
+  
+  String actresult = "";
+  for (int i = 0; i < sizeof(result); i++) {
+     actresult = actresult + (char) result[i]; 
+  }
+  return actresult;
+  
+}
+
+void getPresentUID() {
   // Dump UID
   String UIDstring = "";
   for (byte i = 0; i < mfrc522.uid.size; i++) {
     UIDstring = UIDstring + String(mfrc522.uid.uidByte[i]);
   }
   mfrc522.PICC_HaltA();
-  return UIDstring;
-}
-
-String encryptMsg(String msg){
-  return msg;
+  read_key = UIDstring;
 }
 
 void printToSerial(String msg){
-  Serial.println(encryptMsg(msg));
+  Serial.println(msg);
 }
 
-void handleInput(String msg){
-  String keypair1 = getValue(msg, ',', 1);
+void handleInput(String input){
+  String keypair1 = getValue(input, ',', 1);
   if (keypair1 != ""){
     String key1 = getValue(keypair1, ':', 0);
-    String value1 = getValue(getValue(keypair1, ':', 1), '!', 0);
-    if(key1.equals("key") && value1 == read_key + "!"){
-      String keypair2 = getValue(msg, ',', 2);
+    String value1 = encrypt(getValue(keypair1, ':', 1));
+    if(key1.equals("key") && compare(value1, read_key)){
+      String keypair2 = getValue(input, ',', 2);
       String key2 = getValue(keypair2, ':', 0);
       String value2 = getValue(keypair2, ':', 1);
       if(key2.equals("auth")){
-        if(getValue(value2, 'e', 0) == "True"){
+        if(getValue(value2, 'e', 0) == "Tru"){
            allowEntry();
         } else {
           unallowedEntry();
@@ -90,7 +116,6 @@ void handleInput(String msg){
       errorTone();
     }
   }
-  read_key = ""; 
 }
 
  String getValue(String data, char separator, int index){
@@ -165,5 +190,24 @@ void unallowedEntry(){
   digitalWrite(RED_PIN, HIGH);
 }
 
+bool compare(String a, String b){
+  char aArray[sizeof(a)];
+  for(int i = 0; i < sizeof(a); i++){
+    aArray[i] = a.charAt(i);
+  }
 
+  char bArray[sizeof(b)];
+  for(int i = 0; i < sizeof(b); i++){
+    bArray[i] = b.charAt(i);
+  }
+  return strcmp(aArray, bArray);
+}
+
+void clean(char *var) {
+    int i = 0;
+    while(var[i] != '\0') {
+        var[i] = '\0';
+        i++;
+    }
+}
 
