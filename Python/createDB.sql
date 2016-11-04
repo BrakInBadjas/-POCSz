@@ -20,7 +20,7 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE Door (
-	id INT NOT NULL
+	id INT NOT NULL,
 	PRIMARY KEY (id)
 );
 
