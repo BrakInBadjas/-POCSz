@@ -10,7 +10,7 @@
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 char* door_ID = "1";
-String key = "KCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQW";
+String key = "AyCLCmHvJao59iDYh0hPfTTZchjXacOXrIMBNtn35fPOjqYkWUFiLwCGh1HRcm";
 String read_key = "";
 
 void setup() {
@@ -61,6 +61,7 @@ void setupDoor() {
 }
 
 void handleNewCard(){
+  Serial.println("server:debug,key:" + read_key);
   String msg = "door:" + String(door_ID) + ",key:" + encrypt(read_key);
   Serial.println(msg);
   readTone();

@@ -3,8 +3,10 @@ import sys
 import time
 import util
 
-serial_port = '/dev/cu.usbmodem1421'
-key = "KCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQWKCQW"
+#Settings and database Setup
+
+serial_port = '/dev/cu.usbmodem1411'
+key = "AyCLCmHvJao59iDYh0hPfTTZchjXacOXrIMBNtn35fPOjqYkWUFiLwCGh1HRcm"
 
 ser = serial.Serial(
     port=serial_port,
@@ -16,9 +18,10 @@ ser = serial.Serial(
 
 print("connected to: " + ser.portstr)
 
-#this will store the line
+#this will store the line read from the serial
 seq = []
 
+#Get the input, read the "commands" and execute the corresponding functions with their
 def handleInput(input):
     print(input);
     seq_input = input.rstrip().split(',')
@@ -31,7 +34,7 @@ def handleInput(input):
         handleDoor(handled_input)
 
 def handleDoor(input):
-    writeSerial('server:received\n')
+    writeSerial('server:received')
     if input.get('status') != None:
         if util.addDoorIfNotExists(input):
             writeSerial('server:connected')
@@ -52,7 +55,7 @@ def xor_strings(input,key):
     inputList = bytes(input, 'utf8')
     keyList = bytes(key, 'utf8')
     for i in range(0,len(inputList)-1):
-        temp += str(inputList[i] ^ keyList[i])
+        temp += chr(inputList[i] ^ keyList[i])
 
     return temp
 
@@ -66,6 +69,12 @@ def writeSerial(data):
     if type(data) == str:
         print(data)
         ser.write(data.encode('utf-8'))
+
+def itersplit_into_x_chunks(string,x=10): # we assume here that x is an int and > 0
+    size = len(string)
+    chunksize = size//x
+    for pos in range(0, size, chunksize):
+        yield string[pos:pos+chunksize]
 
 while True:
     for c in ser.read():
